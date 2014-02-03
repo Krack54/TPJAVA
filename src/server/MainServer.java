@@ -3,13 +3,13 @@ package server;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 
-import sun.rmi.server.Dispatcher;
+import server.Dispatcher;
 
 public class MainServer {
 
 	public static void main(String[] args) {
 		try {
-			Dispatcher d = new Dispatcher();
+			Dispatcher d = new server.Dispatcher(); 
 			Registry registry = LocateRegistry.createRegistry(1099);
 			registry.rebind("dispatcher", d);
 		}
