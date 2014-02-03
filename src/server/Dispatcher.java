@@ -1,5 +1,5 @@
 package server;
 
-public class Dispatcher {
+public class Dispatcher implements DispatcherInterface {
 
 }
