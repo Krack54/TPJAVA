@@ -2,6 +2,7 @@ package client;
 
 public class MainClient{
 
-public static void main(String[] agrs){
-
-Receiver R = new Receiver();
+	public static void main(String[] args) {
+		Receiver r = new Receiver();
+	}
+}
