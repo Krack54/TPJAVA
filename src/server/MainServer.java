@@ -3,6 +3,8 @@ package server;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 
+import sun.rmi.server.Dispatcher;
+
 public class MainServer {
 
 	public static void main(String[] args) {
