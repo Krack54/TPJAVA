@@ -5,11 +5,19 @@ import java.rmi.registry.Registry;
 
 import server.Dispatcher;
 
+/**
+ * Classe de lancement du serveur
+ * @author Robin Kebaili, Tristant Lefebvre
+ *
+ */
 public class MainServer {
 
 	public static void main(String[] args) {
 		try {
-			Dispatcher d = new server.Dispatcher(); 
+			// Création de l'objet dispatcher
+			Dispatcher d = new server.Dispatcher();
+			
+			// Enregistrement de l'objet dispatcher dans le registre
 			Registry registry = LocateRegistry.createRegistry(1099);
 			registry.rebind("dispatcher", d);
 		}
