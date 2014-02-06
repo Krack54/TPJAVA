@@ -6,7 +6,7 @@ import client.ReceiveInterface;
 
 /**
  * Objet serveur principal
- * @author Robin Kebaili, Tristant Lefebvre
+ * @author Robin Kebaili, Tristan Lefebvre
  */
 public class Dispatcher implements DispatcherInterface {
 

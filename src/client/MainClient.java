@@ -7,7 +7,7 @@ import server.Dispatcher;
 
 /**
  * Classe de lancement du client
- * @author Robin Kebaili, Tristant Lefevbre
+ * @author Robin Kebaili, Tristan Lefebvre
  *
  */
 public class MainClient {

@@ -3,6 +3,11 @@ package server;
 import java.rmi.Remote;
 import client.ReceiveInterface;
 
+/**
+ * 
+ * @author Robin Kebaili, Tristan Lefebvre
+ *
+ */
 public interface DispatcherInterface extends Remote {
 
 	/**
