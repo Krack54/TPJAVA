@@ -7,4 +7,8 @@ package client;
  */
 public class Receiver implements ReceiveInterface {
 
+	public void afficheMessage(String s) {
+		System.out.println("Message recu : "+s);
+	}
+
 }

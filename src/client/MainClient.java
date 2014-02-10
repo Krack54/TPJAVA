@@ -2,6 +2,7 @@ package client;
 
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
+import java.util.Scanner;
 
 import server.Dispatcher;
 
@@ -14,6 +15,8 @@ public class MainClient {
 
 	public static void main(String[] args) {
 		try {
+			Scanner sc = new Scanner(System.in);
+			
 			// Vérification du nombre de paramètre
 			if (args.length != 2){
 				System.out.println("nombre de paramètre incorrect");
@@ -36,11 +39,13 @@ public class MainClient {
 
 			// Appel de enregistrer(ReceiverInterface ri) sur la référence du
 			// serveur en passant en paramètre sa propre référence
-			d.enregistrer(receiver);
-
-			// Le serveur Dispatcher reçoit cette référence et l'ajoute dans sa
-			// liste de références clients
-			// TODO
+			d.inscription(receiver);
+			
+			do {
+				System.out.println("Entrez un message a envoyer");
+				d.dispatchMessage(sc.nextLine());
+			} while (true);
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

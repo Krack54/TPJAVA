@@ -19,13 +19,15 @@ public class Dispatcher implements DispatcherInterface {
 	}
 	
 	// Méthodes
-	public void enregistrer(ReceiveInterface client) {
+	public void inscription(ReceiveInterface client) {
 		this.clients.add(client);
 	}
 
 	public void dispatchMessage(String s) {
-		// TODO Auto-generated method stub
-		
+		System.out.println("Message à dispatcher : "+s);
+		for (ReceiveInterface ri : this.clients){
+			ri.afficheMessage(s);
+		}
 	}
 
 }

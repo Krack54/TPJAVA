@@ -20,6 +20,10 @@ public class MainServer {
 			// Enregistrement de l'objet dispatcher dans le registre
 			Registry registry = LocateRegistry.createRegistry(1099);
 			registry.rebind("dispatcher", d);
+			
+			while (true){
+				Thread.sleep(1);
+			}
 		}
 		catch (Exception e){
 			e.printStackTrace();
