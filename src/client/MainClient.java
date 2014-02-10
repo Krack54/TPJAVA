@@ -4,6 +4,8 @@ import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.util.Scanner;
 
+import client.gui.MainFrame;
+
 import server.Dispatcher;
 
 /**
@@ -14,6 +16,8 @@ import server.Dispatcher;
 public class MainClient {
 
 	public static void main(String[] args) {
+		//new MainFrame();
+		
 		try {
 			Scanner sc = new Scanner(System.in);
 			
@@ -49,5 +53,6 @@ public class MainClient {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		
 	}
 }
