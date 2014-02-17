@@ -19,7 +19,7 @@ public class MainPanel extends JPanel {
 	public final static int PANEL_WIDTH = 800;
 	public final static int PANEL_HEIGHT = 600;
 	
-	
+	private long before;
 	// Constructors
 	public MainPanel(){
 		this.mouseX = 200;
@@ -28,28 +28,9 @@ public class MainPanel extends JPanel {
 		this.image = new BufferedImage(MainPanel.PANEL_WIDTH,MainPanel.PANEL_HEIGHT,BufferedImage.TYPE_INT_ARGB);
 		
 		this.setPreferredSize(new Dimension(MainPanel.PANEL_WIDTH,MainPanel.PANEL_HEIGHT));
-		this.addMouseListener(new MouseListener() {
-			public void mouseReleased(MouseEvent arg0) {
-				
-			}
-			
-			public void mousePressed(MouseEvent arg0) {
-			}
-			
-			public void mouseExited(MouseEvent arg0) {
-				
-			}
-			
-			public void mouseEntered(MouseEvent arg0) {
-				
-			}
-			
-			public void mouseClicked(MouseEvent arg0) {
-				
-			}
-		});
+
 		
-		this.addMouseMotionListener(new MouseMotionListener() {
+		MouseMotionListener mml =new MouseMotionListener() {
 			public void mouseMoved(MouseEvent arg0) {
 				MainPanel.this.mouseX = arg0.getX();
 				MainPanel.this.mouseY = arg0.getY();
@@ -61,12 +42,16 @@ public class MainPanel extends JPanel {
 				MainPanel.this.mouseY = arg0.getY();
 				MainPanel.this.repaint();
 				
-
+				System.out.println((System.nanoTime()-before)/1000);
+				before = System.nanoTime();				
 				Graphics g = MainPanel.this.image.getGraphics();
 				g.setColor(Color.black);
 				g.fillOval(arg0.getX()-MainPanel.PEN_SIZE/2,arg0.getY()-MainPanel.PEN_SIZE/2,MainPanel.PEN_SIZE,MainPanel.PEN_SIZE);
+				
 			}
-		});
+		};
+		
+		this.addMouseMotionListener(mml);
 	}
 	
 	// Methods
