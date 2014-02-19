@@ -2,16 +2,18 @@ package client.gui;
 
 import javax.swing.JFrame;
 
+import server.DispatcherInterface;
+
 public class MainFrame extends JFrame {
 
 	// Fields
 	private MainPanel mainPanel;
 	
 	// Constructors
-	public MainFrame(){
+	public MainFrame(DispatcherInterface d){
 		super();
 		
-		this.mainPanel = new MainPanel();
+		this.mainPanel = new MainPanel(d);
 		this.mainPanel.requestFocus();
 		
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -23,4 +25,7 @@ public class MainFrame extends JFrame {
 	}
 	
 	// Methods
+	public MainPanel getMainPanel(){
+		return this.mainPanel;
+	}
 }

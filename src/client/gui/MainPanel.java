@@ -7,8 +7,11 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.awt.image.BufferedImage;
+import java.rmi.RemoteException;
 
 import javax.swing.JPanel;
+
+import server.DispatcherInterface;
 
 public class MainPanel extends JPanel {
 
@@ -18,10 +21,10 @@ public class MainPanel extends JPanel {
 	private BufferedImage image;
 	public final static int PANEL_WIDTH = 800;
 	public final static int PANEL_HEIGHT = 600;
+	private DispatcherInterface dispatcher;
 	
-	private long before;
 	// Constructors
-	public MainPanel(){
+	public MainPanel(DispatcherInterface d){
 		this.mouseX = 200;
 		this.mouseY = 200;
 		
@@ -29,32 +32,76 @@ public class MainPanel extends JPanel {
 		
 		this.setPreferredSize(new Dimension(MainPanel.PANEL_WIDTH,MainPanel.PANEL_HEIGHT));
 
+		this.dispatcher = d;
+		
+		MouseListener ml = new MouseListener() {
+			
+			public void mouseReleased(MouseEvent arg0) {
+				
+			}
+			
+			public void mousePressed(MouseEvent arg0) {
+				try {
+					MainPanel.this.dispatcher.dispatchPoint(arg0.getX(),arg0.getY());
+				} catch (RemoteException e) {
+					e.printStackTrace();
+				}
+			}
+			
+			public void mouseExited(MouseEvent arg0) {
+				
+			}
+			
+			public void mouseEntered(MouseEvent arg0) {
+				
+			}
+			
+			public void mouseClicked(MouseEvent arg0) {
+				
+			}
+		};
 		
 		MouseMotionListener mml =new MouseMotionListener() {
 			public void mouseMoved(MouseEvent arg0) {
+				// Curseur
 				MainPanel.this.mouseX = arg0.getX();
 				MainPanel.this.mouseY = arg0.getY();
 				MainPanel.this.repaint();
 			}
 			
 			public void mouseDragged(MouseEvent arg0) {
+				// Curseur
 				MainPanel.this.mouseX = arg0.getX();
 				MainPanel.this.mouseY = arg0.getY();
 				MainPanel.this.repaint();
 				
-				System.out.println((System.nanoTime()-before)/1000);
-				before = System.nanoTime();				
+				// Dessin
+				/*
 				Graphics g = MainPanel.this.image.getGraphics();
 				g.setColor(Color.black);
 				g.fillOval(arg0.getX()-MainPanel.PEN_SIZE/2,arg0.getY()-MainPanel.PEN_SIZE/2,MainPanel.PEN_SIZE,MainPanel.PEN_SIZE);
+				*/
+				try {
+					MainPanel.this.dispatcher.dispatchPoint(arg0.getX(),arg0.getY());
+				} catch (RemoteException e) {
+					e.printStackTrace();
+				}
 				
 			}
 		};
 		
 		this.addMouseMotionListener(mml);
+		this.addMouseListener(ml);
 	}
 	
 	// Methods
+	public void dessinePoint(int x,int y){
+		System.out.println("Bro dessine point ");
+		Graphics g = this.image.getGraphics();
+		g.setColor(Color.black);
+		g.fillOval(x-MainPanel.PEN_SIZE/2,y-MainPanel.PEN_SIZE/2,MainPanel.PEN_SIZE,MainPanel.PEN_SIZE);
+	}
+	
 	public void paintComponent(Graphics g){
 		g.setColor(Color.white);
 		g.fillRect(0, 0, this.getWidth(), this.getHeight());

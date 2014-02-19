@@ -2,11 +2,10 @@ package client;
 
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
+import java.rmi.server.UnicastRemoteObject;
 import java.util.Scanner;
 
-import client.gui.MainFrame;
-
-import server.Dispatcher;
+import server.DispatcherInterface;
 
 /**
  * Classe de lancement du client
@@ -16,43 +15,51 @@ import server.Dispatcher;
 public class MainClient {
 
 	public static void main(String[] args) {
-		new MainFrame();
-		/*
+		//new MainFrame();
+		
 		try {
 			Scanner sc = new Scanner(System.in);
 			
-			// Vérification du nombre de paramètre
+			// Verification du nombre de paramètre
 			if (args.length != 2){
-				System.out.println("nombre de paramètre incorrect");
+				System.out.println("Erreur, nombre de parametres incorrect");
+				System.out.println("La commande doit etre : java client.MainClient host port");
 				System.exit(1);
 			}
 			
-			// Récupération des paramètres host et port
+			// Recuperation des parametres host et port
 			String host = args[0];
 			int port = Integer.parseInt(args[1]);
 			
-			// Création d'un objet de type Receiver
-			Receiver receiver = new Receiver();
-
-			// Exportation référence distante implémentant ReceiverInterface
+			// Recuperation du registry
 			Registry r = LocateRegistry.getRegistry(host,port);
-
-			// Récupération de la référence distante vers le serveur Dispatcher
-			// à partir du rmiregistry
-			Dispatcher d = (Dispatcher) r.lookup("dispatcher");
-
-			// Appel de enregistrer(ReceiverInterface ri) sur la référence du
-			// serveur en passant en paramètre sa propre référence
-			d.inscription(receiver);
 			
-			do {
-				System.out.println("Entrez un message a envoyer");
-				d.dispatchMessage(sc.nextLine());
-			} while (true);
+			// Recuperation du dispatcher
+			DispatcherInterface d = (DispatcherInterface) r.lookup("dispatcher");
+						
+			// Creation d'un objet de type Receiver
+			Receiver receiver = new Receiver(d);
 			
+			// Creation de son proxy
+			ReceiveInterface proxy = (ReceiveInterface) UnicastRemoteObject.exportObject(receiver,0);
+
+			
+
+			// Inscription sur le serveur
+			d.inscription(proxy);
+			
+			// Boucle principale
+			System.out.println("Entrez un message a envoyer ou exit pour quitter");
+			String str = sc.nextLine();
+			while (str.compareTo("exit") != 0){
+				d.dispatchMessage(str);
+				str = sc.nextLine();
+			} 
+			sc.close();
+			System.exit(0);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		*/
+		
 	}
 }

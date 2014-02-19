@@ -1,5 +1,6 @@
 package server;
 
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import client.ReceiveInterface;
@@ -23,10 +24,16 @@ public class Dispatcher implements DispatcherInterface {
 		this.clients.add(client);
 	}
 
-	public void dispatchMessage(String s) {
+	public void dispatchMessage(String s) throws RemoteException {
 		System.out.println("Message à dispatcher : "+s);
 		for (ReceiveInterface ri : this.clients){
 			ri.afficheMessage(s);
+		}
+	}
+	
+	public void dispatchPoint(int x,int y) throws RemoteException{
+		for (ReceiveInterface ri: this.clients){
+			ri.dessinePoint(x, y);
 		}
 	}
 
