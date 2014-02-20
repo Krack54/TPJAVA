@@ -43,8 +43,6 @@ public class MainClient {
 			// Creation de son proxy
 			ReceiveInterface proxy = (ReceiveInterface) UnicastRemoteObject.exportObject(receiver,0);
 
-			
-
 			// Inscription sur le serveur
 			d.inscription(proxy);
 			

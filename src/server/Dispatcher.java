@@ -12,9 +12,15 @@ import client.ReceiveInterface;
 public class Dispatcher implements DispatcherInterface {
 
 	// Attributs
+	/**
+	 * Liste des clients enregistrés
+	 */
 	private ArrayList<ReceiveInterface> clients;
 	
 	// Constructeurs
+	/**
+	 * Constructeur principale
+	 */
 	public Dispatcher(){
 		this.clients = new ArrayList<>(); 
 	}

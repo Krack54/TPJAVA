@@ -24,6 +24,12 @@ public interface DispatcherInterface extends Remote{
 	 */
 	public abstract void dispatchMessage(String s) throws RemoteException;
 	
+	/**
+	 * Envoi un évenemment de dessin de point
+	 * @param x Positon horizontale du point à dessiner
+	 * @param y Position verticale du point à dessiner
+	 * @throws RemoteException
+	 */
 	public abstract void dispatchPoint(int x,int y) throws RemoteException;
 
 }

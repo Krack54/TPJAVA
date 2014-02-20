@@ -10,8 +10,15 @@ import client.gui.MainFrame;
  */
 public class Receiver implements ReceiveInterface {
 
+	/**
+	 * Fenetre principale
+	 */
 	private MainFrame mainFrame;
 	
+	/**
+	 * Constructeur principal de l'objet principal client
+	 * @param d Interface d'envoi
+	 */
 	public Receiver(DispatcherInterface d){
 		this.mainFrame = new MainFrame(d);
 	}

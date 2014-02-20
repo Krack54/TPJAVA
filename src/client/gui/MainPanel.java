@@ -13,17 +13,54 @@ import javax.swing.JPanel;
 
 import server.DispatcherInterface;
 
+/**
+ * Panel principal du programme client
+ * @author Robrock
+ *
+ */
 public class MainPanel extends JPanel {
 
 	// Fields
-	private int mouseX,mouseY;
+	/**
+	 * Position horizontale du curseur
+	 */
+	private int mouseX;
+	
+	/**
+	 * Position verticale du curseur
+	 */
+	private int mouseY;
+	
+	/**
+	 * Diamètre du point dessiné en pixels
+	 */
 	private static int PEN_SIZE = 10;
+	
+	/**
+	 * Image où le dessin est effectué
+	 */
 	private BufferedImage image;
+	
+	/**
+	 * Largeur fixe du panel
+	 */
 	public final static int PANEL_WIDTH = 800;
+	
+	/**
+	 * Hauteur fixe du panel
+	 */
 	public final static int PANEL_HEIGHT = 600;
+	
+	/**
+	 * Interface d'envoi des évennements
+	 */
 	private DispatcherInterface dispatcher;
 	
 	// Constructors
+	/**
+	 * Consucteur principal du panel
+	 * @param d Interface d'envoi des évennements
+	 */
 	public MainPanel(DispatcherInterface d){
 		this.mouseX = 200;
 		this.mouseY = 200;
@@ -95,11 +132,18 @@ public class MainPanel extends JPanel {
 	}
 	
 	// Methods
+	/**
+	 * Dessine un point sur l'image contenue dans le panel
+	 * @param x Position horizontale du point
+	 * @param y Position verticale du point
+	 */
 	public void dessinePoint(int x,int y){
 		System.out.println("Bro dessine point ");
 		Graphics g = this.image.getGraphics();
 		g.setColor(Color.black);
 		g.fillOval(x-MainPanel.PEN_SIZE/2,y-MainPanel.PEN_SIZE/2,MainPanel.PEN_SIZE,MainPanel.PEN_SIZE);
+		
+		this.repaint();
 	}
 	
 	public void paintComponent(Graphics g){
