@@ -113,11 +113,6 @@ public class MainPanel extends JPanel {
 				MainPanel.this.repaint();
 				
 				// Dessin
-				/*
-				Graphics g = MainPanel.this.image.getGraphics();
-				g.setColor(Color.black);
-				g.fillOval(arg0.getX()-MainPanel.PEN_SIZE/2,arg0.getY()-MainPanel.PEN_SIZE/2,MainPanel.PEN_SIZE,MainPanel.PEN_SIZE);
-				*/
 				try {
 					MainPanel.this.dispatcher.dispatchPoint(arg0.getX(),arg0.getY());
 				} catch (RemoteException e) {
@@ -138,7 +133,6 @@ public class MainPanel extends JPanel {
 	 * @param y Position verticale du point
 	 */
 	public void dessinePoint(int x,int y){
-		System.out.println("Bro dessine point ");
 		Graphics g = this.image.getGraphics();
 		g.setColor(Color.black);
 		g.fillOval(x-MainPanel.PEN_SIZE/2,y-MainPanel.PEN_SIZE/2,MainPanel.PEN_SIZE,MainPanel.PEN_SIZE);
